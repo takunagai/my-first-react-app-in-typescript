@@ -1,7 +1,12 @@
 import React from 'react';
 
-const App = ({message}: { message: string } ) => { // message 以外は許容しないように。実際は interface を使うことがほとんど
-  return <div>{message}</div>;
+// interface で外に切り離す。再利用も可能に
+interface AppProps {
+  message: string;
+}
+
+const App = ({ message }: AppProps ) => { // interface で指定
+  return <div>{message}</div>; // カーソルオンで string 型なのを確認
 };
 
 export default App;
