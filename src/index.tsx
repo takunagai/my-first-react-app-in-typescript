@@ -20,3 +20,7 @@ import App from './App'; // 自作のモジュール(コンポーネント)
 
     // // ↑ のエラーはのちに解説
 })();
+
+
+// コンポーネントの使用先で props をセットすると、↑ のエラーは消える
+ReactDOM.render(<App message="Hello, React!" />, document.getElementById('root'));
