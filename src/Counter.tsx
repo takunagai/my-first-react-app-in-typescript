@@ -36,18 +36,18 @@ const Counter: React.FC<{}> = () => {
     };
 
     /**
-     * 何回レンダリングしているかを計測する機能を実装していく
-     * (レンダリングされるごとに、値が増える)
+     * useRef で、何回レンダリングしているかを計測する機能を実装していく
+     * (= 再レンダリングごとに、値が増える)
      * 
      * UseEffect: コンポーネントがレンダーされたら必ず実行される処理を書く
      */
-    const renderTimes = useRef(0); // renderTimes に 0 を保持させている
+    const renderTimes = useRef<number>(0); // renderTimes に 0 を保持させている。型引数で型制約
     // ↑ の型定義で見た通り、値の取り出しは、current で取り出せる → (B)
 
     useEffect(() => {
         // ブラウザのコンソールを確認
         // +1/-1 ボタンをクリック(再レンダリング)するたびに、この命令が実行される！
-        console.log('render was done.');
+        renderTimes.current = renderTimes.current + 1;
     });
 
     return (
