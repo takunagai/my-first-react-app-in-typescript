@@ -19,7 +19,7 @@ const Counter: React.FC<{}> = () => {
     });
 
     // useRef、null で初期化したオブジェクトを作成
-    const ref = useRef<HTMLInputElement>(null); // B、input 要素の ref で受け取る型 <HTMLInputElement> を型引数にすることで、変数 ref の方が React.RefObject<HTMLInputElement> とできる
+    const ref = useRef<HTMLInputElement>(null!); // ! は C を参照。B、input 要素の ref で受け取る型 <HTMLInputElement> を型引数にすることで、変数 ref の方が React.RefObject<HTMLInputElement> とできる
     /* useRef にカーソルオンで型を確認 */
     /* useRef<null>(initialValue: null): React.MutableRefObject<null>、型引数が null、A で RefObject<T> としたい */
 
@@ -27,7 +27,9 @@ const Counter: React.FC<{}> = () => {
     const focusInput = () => {
         // const current = ref.current;
         // if (current != null) current.focus(); // ref.current で input の値を参照できる。初期値 null の場合には処理させないよう分岐処理しないとエラー
-        ref.current?.focus(); // Optional Chainning - null の時は実行しない
+        // ref.current?.focus(); // Optional Chainning - null の時は実行しない
+        // 実際の処理では、null であるはずがない → null の場合は除外してと TypeScript に伝える → 変数 ref の引数に null! と ! をつける (Non-Null Assertion Operator) // C
+        ref.current.focus(); // Optional Chainning - null の時は実行しない
     };
 
     return (
