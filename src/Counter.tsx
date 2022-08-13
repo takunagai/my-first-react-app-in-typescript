@@ -23,6 +23,12 @@ const Counter: React.FC<{}> = () => {
     /* useRef にカーソルオンで型を確認 */
     /* useRef<null>(initialValue: null): React.MutableRefObject<null>、型引数が null、A で RefObject<T> としたい */
 
+    // ボタンを押すとフォーカスする処理の関数
+    const focusInput = () => {
+        const current = ref.current;
+        if (current != null) current.focus(); // ref.current で input の値を参照できる。初期値 null の場合には処理させないよう分岐処理しないとエラー
+    };
+
     return (
         <div>
             <div>value: {value}</div>
@@ -40,6 +46,8 @@ const Counter: React.FC<{}> = () => {
             {/* `type Ref<T> = RefCallback<T> | RefObject<T> | null;`、 今回は RefObject<T> */}{/* A */}
             {/* RefObject にカーソルオン > 定義に移動で確認 */}
             {/* `interface RefObject<T> {readonly current: T | null;}` */}
+
+            <button onClick={focusInput}>Click Me!</button>
         </div>
     );
 }
