@@ -25,8 +25,9 @@ const Counter: React.FC<{}> = () => {
 
     // ボタンを押すとフォーカスする処理の関数
     const focusInput = () => {
-        const current = ref.current;
-        if (current != null) current.focus(); // ref.current で input の値を参照できる。初期値 null の場合には処理させないよう分岐処理しないとエラー
+        // const current = ref.current;
+        // if (current != null) current.focus(); // ref.current で input の値を参照できる。初期値 null の場合には処理させないよう分岐処理しないとエラー
+        ref.current?.focus(); // Optional Chainning - null の時は実行しない
     };
 
     return (
